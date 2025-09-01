@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://1pjq2vpgficg"]
+
+[ext_resource type="Texture2D" uid="uid://j76chmubclta" path="res://textures/alien.png" id="1_h100l"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_u8rjw"]
+size = Vector3(0.324982, 0.31427, 0.112061)
+
+[node name="Alien" type="Area3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.57764e-05, 3.05176e-05, -0.0108643)
+shape = SubResource("BoxShape3D_u8rjw")
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+texture = ExtResource("1_h100l")

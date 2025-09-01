@@ -1,0 +1,38 @@
+# Written by MakeHuman 1.2.1 alpha
+version v1.2.1
+uuid 925ad77b-1ee4-4180-bc9d-b19eff52fc62
+name sam
+camera 20.5 351.5 0.13109466165899095 0.47945187160690017 0.17005131727738754 1.225
+modifier torso/torso-scale-vert-decr|incr 0.042000
+modifier torso/torso-trans-in|out 0.014000
+modifier torso/torso-trans-down|up -0.084000
+modifier torso/torso-trans-backward|forward -0.042000
+modifier breast/BreastSize 0.347000
+modifier breast/BreastFirmness 0.500000
+modifier macrodetails/Gender 1.000000
+modifier macrodetails/Age 0.854000
+modifier macrodetails/African 0.147215
+modifier macrodetails/Asian 0.060785
+modifier macrodetails/Caucasian 0.792000
+modifier macrodetails-universal/Muscle 0.861000
+modifier macrodetails-universal/Weight 0.778000
+modifier macrodetails-height/Height 0.597000
+modifier macrodetails-proportions/BodyProportions 0.604000
+tongue tongue01 52ad91a3-caad-4e50-8c38-67634e5e789c
+teeth Teeth_Base 0a5ec82a-0d5f-43ce-a765-8f076f95692d
+proxy male_muscle_13290 79e967dc-3f7a-4f2d-851e-4f06753ed571
+hair short02 c104cd4a-1edc-43f9-8b94-f63345a44638
+skeleton game_engine.mhskel
+eyebrows eyebrow012 1c16325c-7831-4166-831a-05c5b609c219
+eyes HighPolyEyes 2c12f43b-1303-432c-b7ce-d78346baf2e6
+clothes shoes05 8ef14ff4-8547-419c-a495-17bab919568b
+clothes male_casualsuit06 be449715-fd7d-49d1-bca1-7fdd4264bc2d
+clothesHideFaces True
+expression attention01.mhpose
+skinMaterial skins/middleage_caucasian_male/middleage_caucasian_male.mhmat
+material short02 c104cd4a-1edc-43f9-8b94-f63345a44638 short02.mhmat
+material HighPolyEyes 2c12f43b-1303-432c-b7ce-d78346baf2e6 eyes/materials/blue.mhmat
+material eyebrow012 1c16325c-7831-4166-831a-05c5b609c219 eyebrow012.mhmat
+material Teeth_Base 0a5ec82a-0d5f-43ce-a765-8f076f95692d teeth/materials/teeth.mhmat
+material tongue01 52ad91a3-caad-4e50-8c38-67634e5e789c tongue01.mhmat
+subdivide False

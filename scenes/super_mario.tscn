@@ -1,0 +1,35 @@
+[gd_scene load_steps=7 format=3 uid="uid://0iqarntlb6hp"]
+
+[ext_resource type="Script" uid="uid://bgeqv63xd1e5y" path="res://scripts/super_mario.gd" id="1_oibhs"]
+[ext_resource type="MeshLibrary" uid="uid://8pmj1q3wacpj" path="res://scenes/walls.tres" id="3_oibhs"]
+[ext_resource type="Texture2D" uid="uid://cauccw2icmenq" path="res://textures/grass.png" id="3_s6psd"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_esrp5"]
+size = Vector3(2.5, 0, 25)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_s6psd"]
+albedo_texture = ExtResource("3_s6psd")
+uv1_scale = Vector3(10, 100, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_1b8on"]
+material = SubResource("StandardMaterial3D_s6psd")
+size = Vector3(2.5, 0, 25)
+
+[node name="SuperMario" type="Node3D"]
+script = ExtResource("1_oibhs")
+
+[node name="Ground" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground"]
+shape = SubResource("BoxShape3D_esrp5")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ground"]
+mesh = SubResource("BoxMesh_1b8on")
+
+[node name="GridMap" type="GridMap" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.125, 0)
+mesh_library = ExtResource("3_oibhs")
+cell_size = Vector3(0.25, 0.25, 0.25)
+data = {
+"cells": PackedInt32Array(65534, 65511, 1245184, 65532, 65515, 1245184, 0, 65500, 1245184, 65532, 65506, 1245184, 65534, 65522, 1245184, 65534, 65523, 1245184, 65535, 65524, 1245184, 65535, 65525, 1245184, 65534, 65524, 1245184, 65533, 65524, 1245184, 65533, 65523, 1245184, 65532, 65523, 1245184, 65534, 1, 1245184, 65532, 1, 1245184, 2, 10, 1245184, 65535, 8, 1245184, 65534, 13, 1245184, 65532, 27, 1245184, 1, 36, 1245184, 65533, 39, 1245184, 1, 47, 1245184, 4, 24, 1245184)
+}
