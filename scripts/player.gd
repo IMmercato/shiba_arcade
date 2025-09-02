@@ -2,15 +2,12 @@ extends CharacterBody3D
 
 # --- Player settings ---
 const SPEED := 2.5
-const JUMP_VELOCITY := 3
+const JUMP_VELOCITY := 5
 
 func _physics_process(delta: float) -> void: # Add the gravity.
 	if not is_on_floor(): 
-		$Camera3D.rotation.x = deg_to_rad(0) 
 		$player/AnimationPlayer.play("Human Armature|Jump") 
-		velocity += get_gravity() * delta 
-	else: 
-		$Camera3D.rotation.x = deg_to_rad(-25) # Handle jump. 
+		velocity += get_gravity() * delta
 		
 	if Input.is_action_just_pressed("jump") and is_on_floor(): 
 		velocity.y = JUMP_VELOCITY 

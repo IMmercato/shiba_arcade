@@ -12,10 +12,11 @@ size = Vector3(10, 1, 10)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tbgi4"]
 albedo_texture = ExtResource("1_0wfyh")
+uv1_scale = Vector3(10, 10, 10)
 
 [sub_resource type="BoxMesh" id="BoxMesh_tefeu"]
 material = SubResource("StandardMaterial3D_tbgi4")
-size = Vector3(10, 1, 10)
+size = Vector3(50, 1, 50)
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_sugp2"]
 
@@ -45,6 +46,9 @@ material = SubResource("StandardMaterial3D_tefeu")
 size = Vector3(1, 5, 5)
 
 [node name="Main" type="Node"]
+
+[node name="SuperMario" parent="." instance=ExtResource("6_tefeu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 17)
 
 [node name="Ground" type="StaticBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
@@ -81,6 +85,3 @@ shape = SubResource("BoxShape3D_tbgi4")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Buildings"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 2, 0)
 mesh = SubResource("BoxMesh_o6xl0")
-
-[node name="SuperMario" parent="." instance=ExtResource("6_tefeu")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 17.5)
