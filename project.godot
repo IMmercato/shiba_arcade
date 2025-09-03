@@ -15,6 +15,10 @@ run/main_scene="res://scenes/main.tscn"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://images/icon.svg"
 
+[autoload]
+
+AudioManager="*res://scripts/AudioManager.gd"
+
 [dotnet]
 
 project/assembly_name="shiba_arcade"

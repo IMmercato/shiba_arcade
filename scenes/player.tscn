@@ -7,7 +7,7 @@
 radius = 0.113629
 height = 0.521257
 
-[node name="Player" type="CharacterBody3D"]
+[node name="Player" type="CharacterBody3D" groups=["player"]]
 script = ExtResource("1_g2els")
 
 [node name="player" parent="." instance=ExtResource("2_g2els")]
