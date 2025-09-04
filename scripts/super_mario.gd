@@ -35,7 +35,7 @@ func _setup_player_audio():
 		
 		# Load Mario sounds
 		var mario_sounds = {
-			"jump": preload("res://audio/Mario Jump - QuickSounds.com.mp3")
+			"jump": preload("res://audio/mario_jump.mp3")
 		}
 		
 		# Store sounds in player for access

@@ -2,7 +2,7 @@ extends Node
 
 # Dictionary to store all sounds
 var sounds: Dictionary = {
-	"mario_jump": preload("res://audio/Mario Jump - QuickSounds.com.mp3")
+	"mario_jump": preload("res://audio/mario_jump.mp3")
 	# Add other sounds for different scenes here
 }
 
