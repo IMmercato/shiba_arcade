@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://0iqarntlb6hp"]
+[gd_scene load_steps=15 format=3 uid="uid://0iqarntlb6hp"]
 
 [ext_resource type="Script" uid="uid://bgeqv63xd1e5y" path="res://scripts/super_mario.gd" id="1_oibhs"]
 [ext_resource type="MeshLibrary" uid="uid://8pmj1q3wacpj" path="res://scenes/walls.tres" id="3_oibhs"]
 [ext_resource type="Texture2D" uid="uid://cauccw2icmenq" path="res://textures/grass.png" id="3_s6psd"]
 [ext_resource type="PackedScene" uid="uid://bqvu24kw21fq4" path="res://scenes/bullet.tscn" id="4_esrp5"]
+[ext_resource type="Texture2D" uid="uid://chep3rmf2u1vq" path="res://textures/coin.png" id="5_s6psd"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_esrp5"]
 size = Vector3(5, 0.1, 25)
@@ -18,6 +19,23 @@ size = Vector3(5, 0.1, 25)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_s6psd"]
 size = Vector3(6, 6, 25)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1b8on"]
+size = Vector3(1, 1, 0.25)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_s6psd"]
+top_radius = 0.1
+bottom_radius = 0.1
+height = 5.0
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_1b8on"]
+height = 5.0
+radius = 0.1
+
+[sub_resource type="PrismMesh" id="PrismMesh_s6psd"]
+size = Vector3(1, 2, 0)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_s6psd"]
 
 [node name="SuperMario" type="Node3D"]
 script = ExtResource("1_oibhs")
@@ -59,3 +77,34 @@ collision_mask = 3
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
 shape = SubResource("BoxShape3D_s6psd")
+
+[node name="Area3D2" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+shape = SubResource("BoxShape3D_1b8on")
+
+[node name="Coin" type="Sprite3D" parent="Area3D2"]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0.5, 0)
+texture = ExtResource("5_s6psd")
+
+[node name="pole" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 12.5)
+mesh = SubResource("CylinderMesh_s6psd")
+
+[node name="Area3D" type="Area3D" parent="pole"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="pole/Area3D"]
+shape = SubResource("CylinderShape3D_1b8on")
+
+[node name="flag" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -1, 4.5, 12.5)
+mesh = SubResource("PrismMesh_s6psd")
+skeleton = NodePath("finish")
+
+[node name="finish" type="Area3D" parent="flag"]
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, -2, -1, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="flag/finish"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -1, 2, 0)
+shape = SubResource("ConvexPolygonShape3D_s6psd")

@@ -24,3 +24,4 @@ mesh = SubResource("CapsuleMesh_mkf8s")
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
 stream = SubResource("AudioStreamMP3_mkf8s")
 autoplay = true
+max_distance = 50.0

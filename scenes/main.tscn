@@ -18,6 +18,17 @@ uv1_scale = Vector3(10, 10, 10)
 material = SubResource("StandardMaterial3D_tbgi4")
 size = Vector3(50, 1, 50)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_tbgi4"]
+size = Vector3(1.04358, 4.96014, 5.03412)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tefeu"]
+albedo_texture = ExtResource("2_jyhfs")
+uv1_scale = Vector3(5, 50, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_o6xl0"]
+material = SubResource("StandardMaterial3D_tefeu")
+size = Vector3(1, 5, 5)
+
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_sugp2"]
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_jyhfs"]
@@ -34,17 +45,6 @@ sky_material = SubResource("ProceduralSkyMaterial_sugp2")
 background_mode = 2
 sky = SubResource("Sky_jyhfs")
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_tbgi4"]
-size = Vector3(1.04358, 4.96014, 5.03412)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tefeu"]
-albedo_texture = ExtResource("2_jyhfs")
-uv1_scale = Vector3(5, 50, 1)
-
-[sub_resource type="BoxMesh" id="BoxMesh_o6xl0"]
-material = SubResource("StandardMaterial3D_tefeu")
-size = Vector3(1, 5, 5)
-
 [node name="Main" type="Node"]
 
 [node name="SuperMario" parent="." instance=ExtResource("6_tefeu")]
@@ -58,6 +58,16 @@ shape = SubResource("BoxShape3D_jyhfs")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Ground"]
 mesh = SubResource("BoxMesh_tefeu")
+
+[node name="Buildings" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Buildings"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 1.98782, 0)
+shape = SubResource("BoxShape3D_tbgi4")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Buildings"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 2, 0)
+mesh = SubResource("BoxMesh_o6xl0")
 
 [node name="Player" parent="." instance=ExtResource("2_sugp2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.5)
@@ -76,13 +86,3 @@ environment = SubResource("Environment_tbgi4")
 
 [node name="Alien" parent="." instance=ExtResource("5_tbgi4")]
 transform = Transform3D(1, 0, 0, 0, 0.642788, 0.766044, 0, -0.766044, 0.642788, 2, 2, 3)
-
-[node name="Buildings" type="StaticBody3D" parent="."]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Buildings"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 1.98782, 0)
-shape = SubResource("BoxShape3D_tbgi4")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Buildings"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 2, 0)
-mesh = SubResource("BoxMesh_o6xl0")
