@@ -50,3 +50,5 @@ func _cleanup_player_audio():
 		if player.has_meta("mario_sounds"):
 			player.remove_meta("mario_sounds")
 		print("Mario audio cleaned up")
+		
+		
