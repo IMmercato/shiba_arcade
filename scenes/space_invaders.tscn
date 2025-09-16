@@ -1,0 +1,28 @@
+[gd_scene load_steps=7 format=3 uid="uid://byroosp7odarb"]
+
+[ext_resource type="Script" uid="uid://u1cl543jgxpj" path="res://scripts/space_invaders.gd" id="1_3jvfp"]
+[ext_resource type="Texture2D" uid="uid://cauccw2icmenq" path="res://textures/grass.png" id="2_4nsau"]
+[ext_resource type="PackedScene" uid="uid://cv8vnc15tycqk" path="res://scenes/aliens.tscn" id="3_5lq3o"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_td7i5"]
+albedo_texture = ExtResource("2_4nsau")
+
+[sub_resource type="BoxMesh" id="BoxMesh_1mw2v"]
+material = SubResource("StandardMaterial3D_td7i5")
+size = Vector3(50, 0.5, 30)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_0jppm"]
+size = Vector3(50, 0.5, 30)
+
+[node name="Space_Invaders" type="Node3D"]
+script = ExtResource("1_3jvfp")
+
+[node name="Ground" type="StaticBody3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ground"]
+mesh = SubResource("BoxMesh_1mw2v")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground"]
+shape = SubResource("BoxShape3D_0jppm")
+
+[node name="Aliens" parent="." instance=ExtResource("3_5lq3o")]
