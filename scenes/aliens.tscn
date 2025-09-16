@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://cv8vnc15tycqk"]
+
+[ext_resource type="PackedScene" uid="uid://bi8eon12oss3i" path="res://assets/models/alien.gltf" id="1_1lhgi"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_omj1p"]
+size = Vector3(5, 4.43372, 0.581665)
+
+[node name="Aliens" type="CharacterBody3D"]
+
+[node name="alien" parent="." instance=ExtResource("1_1lhgi")]
+transform = Transform3D(0.01, 0, 0, 0, 0.01, 0, 0, 0, 0.01, -5, 1.9, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.21686, -0.278015)
+shape = SubResource("BoxShape3D_omj1p")
