@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://c813nda7h1q1"]
+
+[ext_resource type="PackedScene" uid="uid://c1nc5w3sdkfyh" path="res://assets/models/GOOMBA_Animated.gltf" id="1_21hcc"]
+
+[node name="Goomba" type="CharacterBody3D"]
+
+[node name="GOOMBA_Animated" parent="." instance=ExtResource("1_21hcc")]
+
+[node name="RayCast3D" type="RayCast3D" parent="."]
