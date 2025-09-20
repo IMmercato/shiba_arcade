@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://byroosp7odarb"]
+[gd_scene load_steps=7 format=3 uid="uid://byroosp7odarb"]
 
 [ext_resource type="Script" uid="uid://u1cl543jgxpj" path="res://scripts/space_invaders.gd" id="1_3jvfp"]
 [ext_resource type="Script" uid="uid://osjo8wsd70f8" path="res://addons/zylann.hterrain/hterrain.gd" id="2_4nsau"]
 [ext_resource type="Resource" uid="uid://drtuf2mbiljmb" path="res://terrain/data.hterrain" id="3_5lq3o"]
 [ext_resource type="Script" uid="uid://ccdl00t0ohwpv" path="res://addons/zylann.hterrain/hterrain_texture_set.gd" id="4_td7i5"]
+[ext_resource type="PackedScene" uid="uid://2sbvo44j3kn" path="res://scenes/crabs_spawner.tscn" id="5_5lq3o"]
 
 [sub_resource type="Resource" id="Resource_1mw2v"]
 script = ExtResource("4_td7i5")
@@ -32,3 +33,6 @@ shader_params/u_depth_blending = true
 shader_params/u_triplanar = null
 shader_params/u_tile_reduction = null
 metadata/_custom_type_script = "uid://osjo8wsd70f8"
+
+[node name="CrabsSpawner" parent="." instance=ExtResource("5_5lq3o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 116.91016, 0)

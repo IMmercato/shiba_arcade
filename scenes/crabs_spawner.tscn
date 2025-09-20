@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://2sbvo44j3kn"]
+
+[ext_resource type="Script" uid="uid://b06xf3qq18rul" path="res://scripts/crabs_spawner.gd" id="1_x0jl4"]
+
+[node name="CrabsSpawner" type="Node3D"]
+script = ExtResource("1_x0jl4")
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true
