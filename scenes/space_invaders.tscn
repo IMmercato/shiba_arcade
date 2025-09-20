@@ -1,28 +1,34 @@
-[gd_scene load_steps=7 format=3 uid="uid://byroosp7odarb"]
+[gd_scene load_steps=6 format=3 uid="uid://byroosp7odarb"]
 
 [ext_resource type="Script" uid="uid://u1cl543jgxpj" path="res://scripts/space_invaders.gd" id="1_3jvfp"]
-[ext_resource type="Texture2D" uid="uid://cauccw2icmenq" path="res://textures/grass.png" id="2_4nsau"]
-[ext_resource type="PackedScene" uid="uid://cv8vnc15tycqk" path="res://scenes/aliens.tscn" id="3_5lq3o"]
+[ext_resource type="Script" uid="uid://osjo8wsd70f8" path="res://addons/zylann.hterrain/hterrain.gd" id="2_4nsau"]
+[ext_resource type="Resource" uid="uid://drtuf2mbiljmb" path="res://terrain/data.hterrain" id="3_5lq3o"]
+[ext_resource type="Script" uid="uid://ccdl00t0ohwpv" path="res://addons/zylann.hterrain/hterrain_texture_set.gd" id="4_td7i5"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_td7i5"]
-albedo_texture = ExtResource("2_4nsau")
-
-[sub_resource type="BoxMesh" id="BoxMesh_1mw2v"]
-material = SubResource("StandardMaterial3D_td7i5")
-size = Vector3(50, 0.5, 30)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_0jppm"]
-size = Vector3(50, 0.5, 30)
+[sub_resource type="Resource" id="Resource_1mw2v"]
+script = ExtResource("4_td7i5")
+mode = 0
+textures = [[], []]
 
 [node name="Space_Invaders" type="Node3D"]
 script = ExtResource("1_3jvfp")
 
-[node name="Ground" type="StaticBody3D" parent="."]
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Ground"]
-mesh = SubResource("BoxMesh_1mw2v")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground"]
-shape = SubResource("BoxShape3D_0jppm")
-
-[node name="Aliens" parent="." instance=ExtResource("3_5lq3o")]
+[node name="HTerrain" type="Node3D" parent="."]
+script = ExtResource("2_4nsau")
+centered = true
+_terrain_data = ExtResource("3_5lq3o")
+chunk_size = 32
+collision_enabled = true
+collision_layer = 1
+collision_mask = 1
+shader_type = "Classic4Lite"
+custom_shader = null
+custom_globalmap_shader = null
+texture_set = SubResource("Resource_1mw2v")
+render_layers = 1
+cast_shadow = 1
+shader_params/u_ground_uv_scale = 20
+shader_params/u_depth_blending = true
+shader_params/u_triplanar = null
+shader_params/u_tile_reduction = null
+metadata/_custom_type_script = "uid://osjo8wsd70f8"
