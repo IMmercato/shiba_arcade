@@ -1,16 +1,18 @@
 extends Node3D
 
 @export var crab_scene = preload("res://scenes/aliens.tscn")
-@export var rows: int = 5
+@export var rows: int = 3
 @export var columns: int = 10
 @export var spacing: float = 1.5
-@export var move_interval: float = 0.5  # Time between movements
+@export var move_interval: float = 0.5
+@export var movement_distance: float = 0.5  # How far to move each step
 
 var crabs = []
 var move_direction = 1  # 1 for right, -1 for left
+var boundary_left = -10.0  # Adjust based on your game area
+var boundary_right = 10.0  # Adjust based on your game area
 
 func _ready():
-	# Create and configure the timer
 	var timer = Timer.new()
 	timer.wait_time = move_interval
 	timer.timeout.connect(_on_timer_timeout)
@@ -44,30 +46,31 @@ func _on_timer_timeout():
 func move_formation():
 	var should_move_down = false
 	
-	# Check if any crab is at the edge
+	# Check if ANY crab would go beyond boundaries with the next move
 	for crab in crabs:
 		if is_instance_valid(crab):
-			# Check right edge
-			if crab.global_position.x > 8 and move_direction > 0:
+			var next_x_position = crab.global_position.x + (move_direction * movement_distance)
+			
+			# Check if this crab would go beyond boundaries
+			if next_x_position > boundary_right and move_direction > 0:
 				should_move_down = true
 				break
-			# Check left edge
-			if crab.global_position.x < -8 and move_direction < 0:
+			if next_x_position < boundary_left and move_direction < 0:
 				should_move_down = true
 				break
 	
 	if should_move_down:
 		move_direction *= -1  # Change direction
 		move_all_crabs_down()
-		print("Formation moving down!")
+		print("Formation moving down! Direction: ", "left" if move_direction < 0 else "right")
 	else:
 		move_all_crabs_horizontal()
-		print("Formation moving horizontal")
+		print("Formation moving horizontal: ", "right" if move_direction > 0 else "left")
 
 func move_all_crabs_horizontal():
 	for crab in crabs:
 		if is_instance_valid(crab):
-			crab.position.x += move_direction * 0.5  # Move sideways
+			crab.position.x += move_direction * movement_distance
 
 func move_all_crabs_down():
 	for crab in crabs:
