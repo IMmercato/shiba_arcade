@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://diwan2wwm77x1"]
 
 [ext_resource type="Script" uid="uid://c7cpw4fu67ds7" path="res://scripts/player.gd" id="1_g2els"]
-[ext_resource type="PackedScene" uid="uid://cpnf07c4f76v4" path="res://assets/models/human-animated.glb" id="2_g2els"]
+[ext_resource type="PackedScene" uid="uid://b2uimipawa0ro" path="res://assets/models/human-animated.glb" id="2_g2els"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_qhqgy"]
 radius = 0.113629
@@ -18,4 +18,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00716352, 0.259989, 0)
 shape = SubResource("CapsuleShape3D_qhqgy")
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(-1, 8.74228e-08, 0, 8.60946e-08, 0.984808, 0.173648, 1.51808e-08, 0.173648, -0.984808, 0, 0.8, -1)
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0.48505396, 0.06397772)
+
+[node name="Head" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.29347676, 0.36202216)

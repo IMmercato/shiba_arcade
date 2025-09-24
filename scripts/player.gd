@@ -3,10 +3,22 @@ extends CharacterBody3D
 # --- Player settings ---
 const SPEED := 2.5
 const JUMP_VELOCITY := 5
+const SENSITIVITY = 0.1
+
+@onready var head = $Head
+@onready var camera = $Camera3D
 
 func _ready():
+	# Mouse Controll
+	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	# Add to player group
 	add_to_group("player")
+
+func _unhandled_input(event):
+	if event is InputEventMouseMotion:
+		head.rotate_y(-event.relative.x * SENSITIVITY)
+		camera.rotate_x(-event.relative.y * SENSITIVITY)
+		camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-40), deg_to_rad(60))
 
 func _physics_process(delta: float) -> void:
 	if not is_on_floor(): 
@@ -25,8 +37,8 @@ func _physics_process(delta: float) -> void:
 		velocity.z = direction.z * SPEED 
 		$player/AnimationPlayer.play("Human Armature|Walk")
 	else: 
-		velocity.x = move_toward(velocity.x, 0, SPEED) 
-		velocity.z = move_toward(velocity.z, 0, SPEED) 
+		velocity.x = 0.0
+		velocity.z = 0.0
 	
 	move_and_slide()
 
