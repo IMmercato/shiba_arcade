@@ -3,21 +3,33 @@ extends CharacterBody3D
 # --- Player settings ---
 const SPEED := 2.5
 const JUMP_VELOCITY := 5
-const SENSITIVITY = 0.1
+const SENSITIVITY := 0.005
 
-@onready var head = $Head
 @onready var camera = $Camera3D
+var current_sensitivity := SENSITIVITY
 
 func _ready():
-	# Mouse Controll
+	# Mouse Control
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	# Add to player group
 	add_to_group("player")
 
 func _unhandled_input(event):
 	if event is InputEventMouseMotion:
-		head.rotate_y(-event.relative.x * SENSITIVITY)
-		camera.rotate_x(-event.relative.y * SENSITIVITY)
+		# Block camera rotation during jump
+		if not is_on_floor():
+			return
+
+		# Slow down rotation while walking
+		var input_dir := Input.get_vector("left", "right", "front", "back")
+		if input_dir.length() > 0.1:
+			current_sensitivity = SENSITIVITY * 0.5  # Reduced sensitivity while walking
+		else:
+			current_sensitivity = SENSITIVITY  # Normal sensitivity when idle
+
+		# Apply rotation
+		rotate_y(-event.relative.x * current_sensitivity)
+		camera.rotate_x(-event.relative.y * current_sensitivity)
 		camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-40), deg_to_rad(60))
 
 func _physics_process(delta: float) -> void:
