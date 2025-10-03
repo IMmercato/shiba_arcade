@@ -1,9 +1,17 @@
-[gd_scene load_steps=2 format=3 uid="uid://c813nda7h1q1"]
+[gd_scene load_steps=4 format=3 uid="uid://c813nda7h1q1"]
 
-[ext_resource type="PackedScene" uid="uid://c1nc5w3sdkfyh" path="res://assets/models/GOOMBA_Animated.gltf" id="1_21hcc"]
+[ext_resource type="PackedScene" uid="uid://8vhfx7qm4g10" path="res://assets/models/Goomba.gltf" id="1_21hcc"]
+[ext_resource type="Script" uid="uid://co8xlaf2fd1he" path="res://scripts/goomba.gd" id="1_s1jgw"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_21hcc"]
+radius = 0.075
+height = 0.25
 
 [node name="Goomba" type="CharacterBody3D"]
+script = ExtResource("1_s1jgw")
 
-[node name="GOOMBA_Animated" parent="." instance=ExtResource("1_21hcc")]
+[node name="Goomba" parent="." instance=ExtResource("1_21hcc")]
 
-[node name="RayCast3D" type="RayCast3D" parent="."]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.00019454956, 0.0067964196)
+shape = SubResource("CapsuleShape3D_21hcc")
