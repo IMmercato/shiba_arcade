@@ -1,0 +1,82 @@
+[gd_scene load_steps=7 format=3 uid="uid://ddwdngf6sweng"]
+
+[ext_resource type="PackedScene" uid="uid://d3txvrkeocbfj" path="res://assets/models/pacman.glb" id="1_yqeox"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_yqeox"]
+ground_bottom_color = Color(0, 0, 0, 1)
+
+[sub_resource type="Sky" id="Sky_vjb58"]
+sky_material = SubResource("ProceduralSkyMaterial_yqeox")
+
+[sub_resource type="Environment" id="Environment_yqeox"]
+sky = SubResource("Sky_vjb58")
+ambient_light_source = 3
+
+[sub_resource type="Gradient" id="Gradient_yqeox"]
+colors = PackedColorArray(0, 0, 0, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_vjb58"]
+gradient = SubResource("Gradient_yqeox")
+fill_from = Vector2(0.30373833, 0)
+fill_to = Vector2(0.6682243, 0.018691588)
+
+[node name="Menu" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_yqeox")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.18676408, 0, 0.9824048, 0, 1, 0, -0.9824048, 0, -0.18676408, 2.9638448, 0.29202735, -1.1948004)
+light_color = Color(1, 1, 0, 1)
+
+[node name="pacman" parent="." instance=ExtResource("1_yqeox")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 0)
+
+[node name="Menu" type="CanvasLayer" parent="."]
+
+[node name="TextureRect" type="TextureRect" parent="Menu"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_vjb58")
+
+[node name="Label" type="Label" parent="Menu"]
+anchors_preset = -1
+anchor_left = 0.155
+anchor_top = 0.208
+anchor_right = 0.155
+anchor_bottom = 0.208
+offset_left = -54.559998
+offset_top = -44.783997
+offset_right = 54.440002
+offset_bottom = 45.216003
+theme_override_font_sizes/font_size = 65
+text = "IDK"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Menu"]
+anchors_preset = -1
+anchor_left = 0.17500001
+anchor_top = 0.50100005
+anchor_right = 0.17500001
+anchor_bottom = 0.50100005
+offset_left = -156.6
+offset_top = -142.64804
+offset_right = 156.4
+offset_bottom = 142.35196
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="Start" type="Button" parent="Menu/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "Start Game
+"
+
+[node name="Leave" type="Button" parent="Menu/VBoxContainer"]
+layout_mode = 2
+text = "Quit Game"
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(-4.32828e-08, -0.13969159, 0.9901951, -6.106113e-09, 0.9901951, 0.13969159, -1, 0, -4.371139e-08, 4.142931, 0.702471, 1.4569399)
