@@ -11,9 +11,8 @@ config_version=5
 [application]
 
 config/name="shiba_arcade"
-run/main_scene="res://scenes/main.tscn"
-config/features=PackedStringArray("4.4", "GL Compatibility")
-config/icon="res://images/icon.svg"
+run/main_scene="uid://ddwdngf6sweng"
+config/features=PackedStringArray("4.5", "GL Compatibility")
 
 [dotnet]
 
@@ -21,7 +20,7 @@ project/assembly_name="shiba_arcade"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/godot_super-wakatime/plugin.cfg")
+enabled=PackedStringArray("res://addons/godot_super-wakatime/plugin.cfg", "res://addons/zylann.hterrain/plugin.cfg")
 
 [filesystem]
 

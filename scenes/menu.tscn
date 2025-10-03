@@ -1,6 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://ddwdngf6sweng"]
+[gd_scene load_steps=8 format=3 uid="uid://ddwdngf6sweng"]
 
 [ext_resource type="PackedScene" uid="uid://d3txvrkeocbfj" path="res://assets/models/pacman.glb" id="1_yqeox"]
+[ext_resource type="Script" uid="uid://82aei4t7biex" path="res://scripts/menu.gd" id="2_vjb58"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_yqeox"]
 ground_bottom_color = Color(0, 0, 0, 1)
@@ -21,6 +22,7 @@ fill_from = Vector2(0.30373833, 0)
 fill_to = Vector2(0.6682243, 0.018691588)
 
 [node name="Menu" type="Node3D"]
+script = ExtResource("2_vjb58")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_yqeox")
@@ -35,6 +37,7 @@ transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0
 [node name="Menu" type="CanvasLayer" parent="."]
 
 [node name="TextureRect" type="TextureRect" parent="Menu"]
+self_modulate = Color(1, 1, 1, 0.28627452)
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -80,3 +83,6 @@ text = "Quit Game"
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(-4.32828e-08, -0.13969159, 0.9901951, -6.106113e-09, 0.9901951, 0.13969159, -1, 0, -4.371139e-08, 4.142931, 0.702471, 1.4569399)
+
+[connection signal="pressed" from="Menu/VBoxContainer/Start" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="Menu/VBoxContainer/Leave" to="." method="_on_leave_pressed"]
