@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://8yj4s27520ud"]
+
+[ext_resource type="PackedScene" uid="uid://cx1upl5fmc67t" path="res://assets/models/WiliamDaniel.glb" id="1_ghv6c"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_f8bfe"]
+radius = 0.71240234
+height = 1.5478516
+
+[node name="WiliamDaniel" type="CharacterBody3D"]
+
+[node name="WiliamDaniel" parent="." instance=ExtResource("1_ghv6c")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.78533137, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.06351662, 0.77904713, 0)
+shape = SubResource("CapsuleShape3D_f8bfe")
