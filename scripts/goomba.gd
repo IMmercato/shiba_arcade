@@ -9,6 +9,7 @@ func _physics_process(delta: float) -> void:
 
 	# Move in Z direction based on current direction
 	velocity = transform.basis.z * speed * direction
+	$AnimationPlayer.play("walk")
 	move_and_slide()
 
 	# Check collisions
