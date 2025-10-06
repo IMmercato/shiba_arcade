@@ -242,6 +242,7 @@ radius = 0.11767578
 height = 0.23706055
 
 [node name="Goomba" type="CharacterBody3D"]
+transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, 0, 0, 0)
 script = ExtResource("1_s1jgw")
 
 [node name="Node_0" type="Node3D" parent="."]
