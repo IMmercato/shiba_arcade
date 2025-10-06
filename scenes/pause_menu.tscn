@@ -1,0 +1,71 @@
+[gd_scene load_steps=3 format=3 uid="uid://bdewtkthohd2a"]
+
+[ext_resource type="Script" uid="uid://darv6fvabmokp" path="res://scripts/pause_menu.gd" id="1_myx47"]
+[ext_resource type="Texture2D" uid="uid://y0q35q45q3j1" path="res://icons/close.svg" id="2_kukqi"]
+
+[node name="Pause Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_myx47")
+
+[node name="HFlowContainer" type="HFlowContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -90.0
+offset_top = -75.0
+offset_right = 110.0
+offset_bottom = 75.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HFlowContainer"]
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="stat" type="Button" parent="HFlowContainer/HBoxContainer"]
+layout_mode = 2
+text = "Stat"
+
+[node name="score" type="Button" parent="HFlowContainer/HBoxContainer"]
+layout_mode = 2
+text = "score"
+
+[node name="story" type="Button" parent="HFlowContainer/HBoxContainer"]
+layout_mode = 2
+text = "story"
+
+[node name="Close" type="Button" parent="HFlowContainer"]
+layout_mode = 2
+icon = ExtResource("2_kukqi")
+flat = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HFlowContainer"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+
+[node name="Continue" type="Button" parent="HFlowContainer/VBoxContainer"]
+layout_mode = 2
+text = "Continue"
+
+[node name="Restart" type="Button" parent="HFlowContainer/VBoxContainer"]
+layout_mode = 2
+text = "Restart"
+
+[node name="Main Menu" type="Button" parent="HFlowContainer/VBoxContainer"]
+layout_mode = 2
+text = "Main Menu"
+
+[connection signal="pressed" from="HFlowContainer/Close" to="." method="_on_close_pressed"]
+[connection signal="pressed" from="HFlowContainer/VBoxContainer/Continue" to="." method="_on_continue_pressed"]
+[connection signal="pressed" from="HFlowContainer/VBoxContainer/Restart" to="." method="_on_restart_pressed"]
+[connection signal="pressed" from="HFlowContainer/VBoxContainer/Main Menu" to="." method="_on_main_menu_pressed"]
