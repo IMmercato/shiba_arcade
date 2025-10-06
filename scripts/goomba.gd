@@ -13,9 +13,3 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 
 	# Check collisions
-
-# func _play_goomba_react():
-	if has_node("GoombaAudio"):
-		var audio = get_node("GoombaAudio")
-		audio.play()
-	# Optional: queue_free() or animation trigger
