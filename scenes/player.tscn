@@ -4,18 +4,18 @@
 [ext_resource type="PackedScene" uid="uid://b2uimipawa0ro" path="res://assets/models/human-animated.glb" id="2_g2els"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_qhqgy"]
-radius = 0.113629
-height = 0.521257
+radius = 0.17333984
+height = 0.9
 
 [node name="Player" type="CharacterBody3D" groups=["player"]]
 script = ExtResource("1_g2els")
 
 [node name="player" parent="." instance=ExtResource("2_g2els")]
-transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+transform = Transform3D(0.185, 0, 0, 0, 0.185, 0, 0, 0, 0.185, 0, 0, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00716352, 0.259989, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.01984683, 0.5, 0)
 shape = SubResource("CapsuleShape3D_qhqgy")
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0.48505396, 0.06397772)
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -0.020129465, 0.90502197, 0.13464633)
