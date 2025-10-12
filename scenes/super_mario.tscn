@@ -1,8 +1,9 @@
-[gd_scene load_steps=14 format=3 uid="uid://0iqarntlb6hp"]
+[gd_scene load_steps=16 format=3 uid="uid://0iqarntlb6hp"]
 
 [ext_resource type="Script" uid="uid://bgeqv63xd1e5y" path="res://scripts/super_mario.gd" id="1_oibhs"]
 [ext_resource type="MeshLibrary" uid="uid://8pmj1q3wacpj" path="res://scenes/walls.tres" id="3_oibhs"]
 [ext_resource type="Texture2D" uid="uid://cauccw2icmenq" path="res://textures/grass.png" id="3_s6psd"]
+[ext_resource type="FontFile" uid="uid://bwbrfrad331uv" path="res://font/Daydream DEMO.otf" id="5_1b8on"]
 [ext_resource type="Texture2D" uid="uid://chep3rmf2u1vq" path="res://textures/coin.png" id="5_s6psd"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_esrp5"]
@@ -35,6 +36,10 @@ size = Vector3(1, 2, 0)
 
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_0yhur"]
 data = PackedVector3Array(0, 1, 0, 0.5, -1, 0, -0.5, -1, 0, 0, 1, 0, -0.5, -1, 0, 0.5, -1, 0, 0, 1, 0, 0, 1, 0, 0.5, -1, 0, 0, 1, 0, 0.5, -1, 0, 0.5, -1, 0, 0, 1, 0, 0, 1, 0, -0.5, -1, 0, 0, 1, 0, -0.5, -1, 0, -0.5, -1, 0, -0.5, -1, 0, 0.5, -1, 0, -0.5, -1, 0, 0.5, -1, 0, 0.5, -1, 0, -0.5, -1, 0)
+
+[sub_resource type="LabelSettings" id="LabelSettings_0yhur"]
+font = ExtResource("5_1b8on")
+font_size = 32
 
 [node name="SuperMario" type="Node3D"]
 script = ExtResource("1_oibhs")
@@ -95,3 +100,38 @@ shape = SubResource("ConcavePolygonShape3D_0yhur")
 [node name="UnderGround" type="Area3D" parent="."]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="UnderGround"]
+
+[node name="Game" type="CanvasLayer" parent="."]
+
+[node name="Name" type="Label" parent="Game"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -342.5
+offset_top = -29.0
+offset_right = 342.5
+offset_bottom = 29.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "First  Level: Super mario"
+label_settings = SubResource("LabelSettings_0yhur")
+
+[node name="Continue" type="Button" parent="Game"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -105.0
+offset_top = 73.0
+offset_right = 106.0
+offset_bottom = 120.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_fonts/font = ExtResource("5_1b8on")
+theme_override_font_sizes/font_size = 24
+text = "Continue"
