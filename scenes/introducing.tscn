@@ -1,0 +1,48 @@
+[gd_scene load_steps=8 format=3 uid="uid://dasrnkl3x0o54"]
+
+[ext_resource type="Script" uid="uid://7kuv2b01x585" path="res://scripts/introducing.gd" id="1_8c1lj"]
+[ext_resource type="FontFile" uid="uid://bwbrfrad331uv" path="res://font/Daydream DEMO.otf" id="1_cbslh"]
+[ext_resource type="PackedScene" uid="uid://d3txvrkeocbfj" path="res://assets/models/pacman.glb" id="3_pomwk"]
+[ext_resource type="Texture2D" uid="uid://bfbb6ea0npsl5" path="res://textures/wp4694506.jpg" id="4_jfask"]
+[ext_resource type="Script" uid="uid://celhar76s00is" path="res://scripts/pacman.gd" id="4_odokx"]
+[ext_resource type="PackedScene" uid="uid://utufks6cv8jp" path="res://scenes/bg_audio.tscn" id="6_04ae1"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_8c1lj"]
+font = ExtResource("1_cbslh")
+
+[node name="Introducing" type="Node"]
+script = ExtResource("1_8c1lj")
+
+[node name="Label" type="Label" parent="."]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -108.0
+grow_horizontal = 2
+grow_vertical = 0
+label_settings = SubResource("LabelSettings_8c1lj")
+
+[node name="Label" type="Label" parent="Label"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -48.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="pacman" parent="." instance=ExtResource("3_pomwk")]
+script = ExtResource("4_odokx")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.087155804, 0, 0.9961947, 0, 1, 0, -0.9961947, 0, 0.087155804, 4.143, 0, 5)
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(-1.3113416e-07, 0, 3, 0, 3, 0, -3, 0, -1.3113416e-07, -10, 3.75, 0)
+texture = ExtResource("4_jfask")
+
+[node name="AudioStreamPlayer" parent="." instance=ExtResource("6_04ae1")]
+
+[connection signal="visibility_changed" from="Label" to="." method="_on_label_visibility_changed"]
