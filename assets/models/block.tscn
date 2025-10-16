@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://bedmec2173vau"]
+
+[ext_resource type="PackedScene" uid="uid://fdfokp4kjp76" path="res://assets/models/prova.glb" id="1_h2a70"]
+[ext_resource type="PackedScene" uid="uid://bqlcn028x3ebt" path="res://walls.gltf" id="2_b3t0h"]
+
+[node name="Block" type="Node3D"]
+
+[node name="prova" parent="." instance=ExtResource("1_h2a70")]
+transform = Transform3D(0.067, 0, 0, 0, 0.067, 0, 0, 0, 0.067, 0, 0, 0)
+
+[node name="Walls" parent="." instance=ExtResource("2_b3t0h")]
