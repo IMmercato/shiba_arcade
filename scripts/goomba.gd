@@ -1,50 +1,49 @@
 extends CharacterBody3D
 
 @export var speed: float = 1.0
-var direction := 1
+var direction: int = 1
 var can_change_direction: bool = true
 
-func _ready():
-	# Make sure collision detection is enabled
-	collision_layer = 1
-	collision_mask = 1
-
 func _physics_process(delta: float) -> void:
+	# Gravity
 	if not is_on_floor():
-		velocity += get_gravity() * delta
+		velocity.y += get_gravity().y * delta
+	else:
+		velocity.y = 0.0
 
-	velocity = transform.basis.z * speed * direction
+	# Forward movement (along Z axis)
+	velocity.x = 0.0
+	velocity.z = speed * direction
+
 	$AnimationPlayer.play("walk")
-	
+
 	move_and_slide()
-	
-	# Check for wall collisions and change direction
+
+	# Wall check
 	if detect_front_collision() and can_change_direction:
 		change_direction()
 
+
 func detect_front_collision() -> bool:
-	# Get all collisions from the last move_and_slide()
 	for i in range(get_slide_collision_count()):
 		var collision = get_slide_collision(i)
-		
-		# Check if this is a front-facing collision
-		var collision_normal = collision.get_normal()
-		var forward_dir = -transform.basis.z * direction  # Actual movement direction
-		
-		# If the collision is roughly in front of us, treat it as a wall
-		if collision_normal.dot(forward_dir) < -0.5:
+		var normal = collision.get_normal()
+
+		# Forward is +Z * direction (matches velocity)
+		var forward = Vector3(0, 0, 1) * direction
+
+		# If wall is in front (normal opposite to forward)
+		if normal.dot(forward) < -0.5:
 			return true
-	
 	return false
+
 
 func change_direction():
 	direction *= -1
-	rotate_y(PI)
-	
-	# Move away from the wall slightly to prevent sticking
-	var move_away = transform.basis.z * 0.2
-	global_translate(move_away)
-	
+	rotate_y(PI)  # flip visually
+
+	velocity.z = speed * direction
+
 	can_change_direction = false
-	await get_tree().create_timer(0.5).timeout  # Reduced cooldown
+	await get_tree().create_timer(0.2).timeout
 	can_change_direction = true
