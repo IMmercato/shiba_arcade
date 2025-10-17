@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://di60n3li865bi"]
+
+[ext_resource type="PackedScene" uid="uid://d3txvrkeocbfj" path="res://assets/models/pacman.glb" id="1_kcrxf"]
+[ext_resource type="Script" uid="uid://celhar76s00is" path="res://scripts/pacman.gd" id="1_kjyp3"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_kjyp3"]
+radius = 2.0335643
+
+[node name="CharacterBody3D" type="CharacterBody3D"]
+script = ExtResource("1_kjyp3")
+
+[node name="pacman" parent="." instance=ExtResource("1_kcrxf")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.3106616)
+shape = SubResource("SphereShape3D_kjyp3")
