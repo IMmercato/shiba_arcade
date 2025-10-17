@@ -1,0 +1,89 @@
+[gd_scene load_steps=7 format=3 uid="uid://dogl203kmlsnd"]
+
+[ext_resource type="ArrayMesh" uid="uid://dfnkgnortapt1" path="res://obj/piranha1.obj" id="1_2xr4y"]
+[ext_resource type="ArrayMesh" uid="uid://bxhsqcyw1vylt" path="res://obj/piranha.obj" id="2_clyk4"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_j63f2"]
+height = 3.7945557
+
+[sub_resource type="Animation" id="Animation_5dtlv"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Piranha1:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Piranha:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_tb8k7"]
+resource_name = "piranha"
+length = 2.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Piranha1:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.25, 2.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, false, true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Piranha:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1.25, 2.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8c083"]
+_data = {
+&"RESET": SubResource("Animation_5dtlv"),
+&"piranha": SubResource("Animation_tb8k7")
+}
+
+[node name="Piranha" type="CharacterBody3D"]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+
+[node name="Piranha1" type="MeshInstance3D" parent="."]
+mesh = ExtResource("1_2xr4y")
+
+[node name="Piranha" type="MeshInstance3D" parent="."]
+visible = false
+mesh = ExtResource("2_clyk4")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.90094, 0)
+shape = SubResource("CapsuleShape3D_j63f2")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_8c083")
+}
+autoplay = "RESET"
