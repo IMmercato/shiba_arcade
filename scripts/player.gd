@@ -18,6 +18,8 @@ var shake_timer := 0.0
 var shake_strength := 0.0
 var shake_fade := 5.0
 var original_shake_position := Vector3.ZERO
+var sprinting_sound := preload("res://audio/running-on-concrete.mp3")
+@onready var sprint_audio: AudioStreamPlayer3D = $SprintAudio
 
 func _ready():
 	# Mouse Control
@@ -67,12 +69,18 @@ func _physics_process(delta: float) -> void:
 		velocity.z = direction.z * current_speed
 		if is_sprinting:
 			$player/AnimationPlayer.play("Human Armature|Run")
+			if not was_sprinting and not sprint_audio.playing:
+				sprint_audio.stream = sprinting_sound
+				sprint_audio.play()
 		else:
 			$player/AnimationPlayer.play("Human Armature|Walk")
 	else: 
 		velocity.x = 0.0
 		velocity.z = 0.0
 		is_sprinting = false
+		
+	if was_sprinting and not is_sprinting:
+		sprint_audio.stop()
 	
 	move_and_slide()
 	
