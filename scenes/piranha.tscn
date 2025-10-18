@@ -86,4 +86,4 @@ shape = SubResource("CapsuleShape3D_j63f2")
 libraries = {
 &"": SubResource("AnimationLibrary_8c083")
 }
-autoplay = "RESET"
+autoplay = "piranha"
