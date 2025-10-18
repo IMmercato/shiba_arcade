@@ -1,10 +1,13 @@
-[gd_scene load_steps=16 format=3 uid="uid://0iqarntlb6hp"]
+[gd_scene load_steps=26 format=3 uid="uid://0iqarntlb6hp"]
 
 [ext_resource type="Script" uid="uid://bgeqv63xd1e5y" path="res://scripts/super_mario.gd" id="1_oibhs"]
 [ext_resource type="MeshLibrary" uid="uid://8pmj1q3wacpj" path="res://scenes/walls.tres" id="3_oibhs"]
 [ext_resource type="Texture2D" uid="uid://cauccw2icmenq" path="res://textures/grass.png" id="3_s6psd"]
+[ext_resource type="Script" uid="uid://dloqrp8hjaxv6" path="res://scripts/flag_pole.gd" id="5_0yhur"]
 [ext_resource type="FontFile" uid="uid://bwbrfrad331uv" path="res://font/Daydream DEMO.otf" id="5_1b8on"]
 [ext_resource type="Texture2D" uid="uid://chep3rmf2u1vq" path="res://textures/coin.png" id="5_s6psd"]
+[ext_resource type="Texture2D" uid="uid://b3u1uv00y77e3" path="res://icons/warning.svg" id="6_1b8on"]
+[ext_resource type="PackedScene" uid="uid://dogl203kmlsnd" path="res://scenes/piranha.tscn" id="8_5by88"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_esrp5"]
 size = Vector3(6, 0.1, 50)
@@ -37,9 +40,88 @@ size = Vector3(1, 2, 0)
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_0yhur"]
 data = PackedVector3Array(0, 1, 0, 0.5, -1, 0, -0.5, -1, 0, 0, 1, 0, -0.5, -1, 0, 0.5, -1, 0, 0, 1, 0, 0, 1, 0, 0.5, -1, 0, 0, 1, 0, 0.5, -1, 0, 0.5, -1, 0, 0, 1, 0, 0, 1, 0, -0.5, -1, 0, 0, 1, 0, -0.5, -1, 0, -0.5, -1, 0, -0.5, -1, 0, 0.5, -1, 0, -0.5, -1, 0, 0.5, -1, 0, 0.5, -1, 0, -0.5, -1, 0)
 
+[sub_resource type="Animation" id="Animation_rypks"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-1, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_5by88"]
+resource_name = "wave"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(-1, 4.5, 0), Vector3(-1, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ycg3l"]
+_data = {
+&"RESET": SubResource("Animation_rypks"),
+&"wave": SubResource("Animation_5by88")
+}
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_1b8on"]
+radius = 1.0
+height = 6.001953
+
 [sub_resource type="LabelSettings" id="LabelSettings_0yhur"]
 font = ExtResource("5_1b8on")
 font_size = 32
+
+[sub_resource type="Animation" id="Animation_0yhur"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Alert:size")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(494, 356.5)]
+}
+
+[sub_resource type="Animation" id="Animation_1b8on"]
+resource_name = "alert"
+length = 0.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Alert:size")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(450, 350), Vector2(600, 500), Vector2(450, 350)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5by88"]
+_data = {
+&"RESET": SubResource("Animation_0yhur"),
+&"alert": SubResource("Animation_1b8on")
+}
 
 [node name="SuperMario" type="Node3D"]
 script = ExtResource("1_oibhs")
@@ -78,28 +160,50 @@ shape = SubResource("BoxShape3D_1b8on")
 transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0.5, 0)
 texture = ExtResource("5_s6psd")
 
-[node name="pole" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 25)
-mesh = SubResource("CylinderMesh_s6psd")
-
-[node name="StaticBody3D" type="StaticBody3D" parent="pole"]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="pole/StaticBody3D"]
-shape = SubResource("ConcavePolygonShape3D_1b8on")
-
-[node name="flag" type="MeshInstance3D" parent="."]
-transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -1, 4.5, 25)
-mesh = SubResource("PrismMesh_s6psd")
-skeleton = NodePath("")
-
-[node name="StaticBody3D" type="StaticBody3D" parent="flag"]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="flag/StaticBody3D"]
-shape = SubResource("ConcavePolygonShape3D_0yhur")
-
 [node name="UnderGround" type="Area3D" parent="."]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="UnderGround"]
+
+[node name="Flag Pole" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 25)
+gravity_space_override = 3
+gravity_point = true
+gravity_point_center = Vector3(0, 0, 0)
+gravity_direction = Vector3(0, 0, 0)
+gravity = 30.0
+script = ExtResource("5_0yhur")
+
+[node name="pole" type="MeshInstance3D" parent="Flag Pole"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
+mesh = SubResource("CylinderMesh_s6psd")
+skeleton = NodePath("../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Flag Pole/pole"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Flag Pole/pole/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_1b8on")
+
+[node name="flag" type="MeshInstance3D" parent="Flag Pole"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -1, 0, 0)
+mesh = SubResource("PrismMesh_s6psd")
+skeleton = NodePath("")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Flag Pole/flag"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Flag Pole/flag/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_0yhur")
+
+[node name="Flag" type="AnimationPlayer" parent="Flag Pole"]
+root_node = NodePath("../flag")
+libraries = {
+&"": SubResource("AnimationLibrary_ycg3l")
+}
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Flag Pole"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+shape = SubResource("CapsuleShape3D_1b8on")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="Flag Pole"]
 
 [node name="Game" type="CanvasLayer" parent="."]
 
@@ -135,3 +239,60 @@ size_flags_vertical = 4
 theme_override_fonts/font = ExtResource("5_1b8on")
 theme_override_font_sizes/font_size = 24
 text = "Continue"
+
+[node name="Alert" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="Alert"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 0.56666666, 0.5, 0.5294118)
+
+[node name="Message" type="Label" parent="Alert"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -475.5
+offset_top = -148.0
+offset_right = 475.5
+offset_bottom = -96.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("5_1b8on")
+theme_override_font_sizes/font_size = 32
+text = "Return Back to supermario level"
+
+[node name="Alert" type="Button" parent="Alert"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -298.01736
+offset_top = -248.01736
+offset_right = 195.98267
+offset_bottom = 108.482635
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+icon = ExtResource("6_1b8on")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Alert"]
+libraries = {
+&"": SubResource("AnimationLibrary_5by88")
+}
+autoplay = "alert"
+
+[node name="Piranha" parent="." instance=ExtResource("8_5by88")]
+transform = Transform3D(0.35355338, 0, 0.35355338, 0, 0.5, 0, -0.35355338, 0, 0.35355338, 2, 0, -15)
+
+[node name="Piranha2" parent="." instance=ExtResource("8_5by88")]
+transform = Transform3D(0.35355335, 0, -0.35355335, 0, 0.5, 0, 0.35355335, 0, 0.35355335, -2, 0, -15)
