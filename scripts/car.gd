@@ -2,24 +2,34 @@ extends VehicleBody3D
 
 @export var MAX_STEER := 0.9
 @export var ENGINE_POWER := 300
+@export var BRAKE_POWER := 20
 
 var player_nearby := false
 var driver: CharacterBody3D = null
 
 func _ready() -> void:
-	$CarCamera.current = false # Ensure car camera starts inactive
+	$CarCamera.current = false
+	# Ensure the car is awake and ready for physics
+	sleeping = false
 
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	if InputManager.driver == self:
 		# Driving logic
-		steering = move_toward(steering, InputManager.get_steering() * MAX_STEER, delta * 10)
+		steering = move_toward(steering, InputManager.get_steering() * MAX_STEER, delta * 2.5)
 		engine_force = InputManager.get_throttle() * ENGINE_POWER
+		
+		# Add braking when reversing
+		if InputManager.get_throttle() < 0 and linear_velocity.length() > 1.0:
+			brake = BRAKE_POWER
+		else:
+			brake = 0.0
 
 		if Input.is_action_just_pressed("exit"):
 			_exit_car()
 	else:
 		steering = 0
 		engine_force = 0
+		brake = 0
 
 		if player_nearby and Input.is_action_just_pressed("enter"):
 			_enter_car()
@@ -40,7 +50,7 @@ func _enter_car() -> void:
 	for p in players:
 		if p.global_position.distance_to(global_position) < 5.0:
 			driver = p
-			p.global_position = global_position + Vector3(0, 1, 0) # Move player inside car
+			p.global_position = global_position + transform.basis.y * 2.0 # Move player above car
 			p.set_process(false)
 			p.set_physics_process(false)
 			p.visible = false
@@ -57,7 +67,9 @@ func _enter_car() -> void:
 func _exit_car() -> void:
 	InputManager.driver = null
 	if driver:
-		driver.global_position = global_position + Vector3(2, 0, 0)
+		# Exit to the side of the car (relative to car's forward direction)
+		var exit_offset = transform.basis.x * 2.0
+		driver.global_position = global_position + exit_offset
 		driver.set_process(true)
 		driver.set_physics_process(true)
 		driver.visible = true

@@ -3,47 +3,54 @@
 [ext_resource type="PackedScene" uid="uid://dic4odu1vx2og" path="res://assets/models/car.fbx" id="1_c35m8"]
 [ext_resource type="Script" uid="uid://ccheo0dt56d3" path="res://scripts/car.gd" id="1_qt2eu"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_qt2eu"]
-size = Vector3(1.3196216, 0.9773083, 2.8972147)
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_qt2eu"]
+points = PackedVector3Array(-1.6840088, -4.3309493, -26.134151, 15.34996, 4.843941, -9.404236, 15.34996, 3.13376, -9.404236, -8.608322, 4.843941, 25.67131, 9.36039, -7.1328545, 23.9556, -12.887878, 3.9888506, -20.540266, 8.506891, 6.557808, 25.67131, -4.3317804, 9.980013, 1.7103484, 12.783432, 3.9888506, -20.534904, -15.454407, 4.843941, -9.409597, 4.224318, 9.980013, 1.7103484, -9.464836, -7.1328545, 23.960962, -8.608322, 6.555965, 25.67131, 10.216905, -3.708807, -23.960962, 3.3678036, 4.843941, 27.387022, -10.321351, -3.708807, -23.960962, -11.240033, -0.23023725, 19.979572, 1.6577902, 2.2768266, -23.960962, -1.6601478, -5.867416, 25.752, -15.454407, 3.13376, -9.409597, -1.6547661, -5.8458815, -24.861868, -7.751807, -0.28660202, -24.818817, 11.926918, -5.4226737, 21.39276, 7.6503763, -0.28844488, -24.813456, -3.4752657, 5.7008743, 27.387022, 9.381077, -7.2933607, -20.439587)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_50v30"]
 size = Vector3(2.5, 1.5, 3.5)
 
 [node name="Car" type="VehicleBody3D"]
-mass = 1000.0
+mass = 500.0
 script = ExtResource("1_qt2eu")
+ENGINE_POWER = 600
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.055561837, 0, 0, 0, 0.055561837, -1.567566e-08, 0, 1.567566e-08, 0.055561837, 0, 0.33757767, 0)
+shape = SubResource("ConvexPolygonShape3D_qt2eu")
 
 [node name="car" parent="." instance=ExtResource("1_c35m8")]
 transform = Transform3D(0.02, 0, 0, 0, 0.02, 0, 0, 0, 0.02, 0, 0, 0)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.4107437e-06, 0.35950232, 0.049917698)
-shape = SubResource("BoxShape3D_qt2eu")
-
 [node name="VehicleWheel3D" type="VehicleWheel3D" parent="."]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -0.5173507, 0.10299653, -0.78775007)
-use_as_traction = true
 use_as_steering = true
 wheel_radius = 0.24
+suspension_stiffness = 25.0
+suspension_max_force = 2000.0
 
 [node name="VehicleWheel3D2" type="VehicleWheel3D" parent="."]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.5077516, 0.107877865, -0.7889242)
-use_as_traction = true
 use_as_steering = true
 wheel_radius = 0.24
+suspension_stiffness = 25.0
+suspension_max_force = 2000.0
 
 [node name="VehicleWheel3D3" type="VehicleWheel3D" parent="."]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -0.51809764, 0.1008205, 0.92391187)
 use_as_traction = true
 wheel_radius = 0.24
+suspension_stiffness = 25.0
+suspension_max_force = 2000.0
 
 [node name="VehicleWheel3D4" type="VehicleWheel3D" parent="."]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.5065266, 0.102519274, 0.9235934)
 use_as_traction = true
 wheel_radius = 0.24
+suspension_stiffness = 25.0
+suspension_max_force = 2000.0
 
 [node name="CarCamera" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25, 0.5, 0.2)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25, 0.6, 0)
 
 [node name="CarArea" type="Area3D" parent="."]
 collision_mask = 3
