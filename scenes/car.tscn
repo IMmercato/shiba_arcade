@@ -1,40 +1,56 @@
-[gd_scene load_steps=4 format=3 uid="uid://5du4iif115l6"]
+[gd_scene load_steps=5 format=3 uid="uid://5du4iif115l6"]
 
-[ext_resource type="PackedScene" uid="uid://ckjnyxepj5ddm" path="res://assets/models/car.fbx" id="1_c35m8"]
+[ext_resource type="PackedScene" uid="uid://dic4odu1vx2og" path="res://assets/models/car.fbx" id="1_c35m8"]
 [ext_resource type="Script" uid="uid://ccheo0dt56d3" path="res://scripts/car.gd" id="1_qt2eu"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_qt2eu"]
-size = Vector3(0.819763, 0.491455, 1.49188)
+size = Vector3(1.3196216, 0.9773083, 2.8972147)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_50v30"]
+size = Vector3(2.5, 1.5, 3.5)
 
 [node name="Car" type="VehicleBody3D"]
 mass = 1000.0
 script = ExtResource("1_qt2eu")
 
 [node name="car" parent="." instance=ExtResource("1_c35m8")]
-transform = Transform3D(0.01, 0, 0, 0, 0.01, 0, 0, 0, 0.01, 0, 0, 0)
+transform = Transform3D(0.02, 0, 0, 0, 0.02, 0, 0, 0, 0.02, 0, 0, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00180054, 0.181519, 0.000823975)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.4107437e-06, 0.35950232, 0.049917698)
 shape = SubResource("BoxShape3D_qt2eu")
 
 [node name="VehicleWheel3D" type="VehicleWheel3D" parent="."]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -0.302169, 0.546345, -0.400052)
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -0.5173507, 0.10299653, -0.78775007)
 use_as_traction = true
 use_as_steering = true
-wheel_radius = 0.1
+wheel_radius = 0.24
 
 [node name="VehicleWheel3D2" type="VehicleWheel3D" parent="."]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.311847, 0.518273, -0.401801)
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.5077516, 0.107877865, -0.7889242)
 use_as_traction = true
 use_as_steering = true
-wheel_radius = 0.1
+wheel_radius = 0.24
 
 [node name="VehicleWheel3D3" type="VehicleWheel3D" parent="."]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -0.293641, 0.555299, 0.413783)
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -0.51809764, 0.1008205, 0.92391187)
 use_as_traction = true
-wheel_radius = 0.1
+wheel_radius = 0.24
 
 [node name="VehicleWheel3D4" type="VehicleWheel3D" parent="."]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.308386, 0.531011, 0.414089)
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.5065266, 0.102519274, 0.9235934)
 use_as_traction = true
-wheel_radius = 0.1
+wheel_radius = 0.24
+
+[node name="CarCamera" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25, 0.5, 0.2)
+
+[node name="CarArea" type="Area3D" parent="."]
+collision_mask = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CarArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+shape = SubResource("BoxShape3D_50v30")
+
+[connection signal="body_entered" from="CarArea" to="." method="_on_car_area_body_entered"]
+[connection signal="body_exited" from="CarArea" to="." method="_on_car_area_body_exited"]
